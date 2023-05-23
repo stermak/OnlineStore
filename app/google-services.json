@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "50092265718",
+    "project_id": "onlinestoreermak",
+    "storage_bucket": "onlinestoreermak.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50092265718:android:43849924cec1454a1d5cd7",
+        "android_client_info": {
+          "package_name": "youngdevs.production.onlinestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50092265718-o8gnemsim2j88c7l03331mo4293hg211.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "youngdevs.production.onlinestore",
+            "certificate_hash": "476ce1e4df50111eb58a2877b21e81dc4ed60094"
+          }
+        },
+        {
+          "client_id": "50092265718-fji8m9r0u3s7kscg986v5fk7dv2a6u8b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTpJc3wTmRJJNzREvJ8nTWnamD2JS0PUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50092265718-fji8m9r0u3s7kscg986v5fk7dv2a6u8b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

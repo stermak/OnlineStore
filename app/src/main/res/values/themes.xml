@@ -1,6 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.OnlineStore" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Удалите следующую строку -->
+        <item name="windowActionBar">false</item>
+        <!-- Добавьте следующую строку -->
+        <item name="windowNoTitle">true</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,12 +18,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.OnlineStore.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="Theme.OnlineStore.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.OnlineStore.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- Base application theme. -->
+    <style name="Base.Theme.OnlineStore" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
 </resources>
