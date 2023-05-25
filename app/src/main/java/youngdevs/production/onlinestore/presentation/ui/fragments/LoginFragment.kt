@@ -12,15 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import youngdevs.production.onlinestore.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 import youngdevs.production.onlinestore.R
+import youngdevs.production.onlinestore.databinding.FragmentLoginBinding
 import youngdevs.production.onlinestore.presentation.viewmodel.LoginViewModel
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     companion object {

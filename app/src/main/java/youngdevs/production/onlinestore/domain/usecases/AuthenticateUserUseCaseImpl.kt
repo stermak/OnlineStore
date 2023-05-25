@@ -2,9 +2,11 @@ package youngdevs.production.onlinestore.domain.usecases
 
 import youngdevs.production.onlinestore.domain.models.UserModel
 import youngdevs.production.onlinestore.domain.repository.UserRepository
+import javax.inject.Inject
 
 
 class AuthenticateUserUseCaseImpl
+@Inject
 constructor(private val userRepository: UserRepository) :
     AuthenticateUserUseCase {
 

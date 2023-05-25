@@ -8,14 +8,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import youngdevs.production.onlinestore.R
 import youngdevs.production.onlinestore.databinding.FragmentRegistrationBinding
 import youngdevs.production.onlinestore.presentation.viewmodel.RegistrationViewModel
 
 // Аннотация AndroidEntryPoint говорит Hilt, чтобы инжектировать зависимости в этот фрагмент
+@AndroidEntryPoint
 class RegistrationFragment : Fragment() {
 
     // Инициализируем переменные

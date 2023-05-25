@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import youngdevs.production.youngmoscow.data.utilities.CollectionNames
+import youngdevs.production.onlinestore.data.utilities.CollectionNames
 import youngdevs.production.onlinestore.domain.models.UserModel
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,6 +21,7 @@ import javax.inject.Singleton
 // Firebase.
 @Singleton
 class UserRepositoryImpl
+@Inject
 constructor(
     private val firebaseAuth: FirebaseAuth
 ) : UserRepository {

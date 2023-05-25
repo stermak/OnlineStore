@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.gms.google-services")
     id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -110,6 +111,9 @@ dependencies {
 
     //kapt
     kapt("androidx.room:room-compiler:2.5.1")
+
+    implementation("com.google.dagger:hilt-android:2.46.1")
+    kapt("com.google.dagger:hilt-compiler:2.46.1")
 }
 
 kapt {

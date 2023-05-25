@@ -9,17 +9,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import youngdevs.production.onlinestore.R
-import youngdevs.production.onlinestore.data.utilities.DependencyInjector
+import youngdevs.production.onlinestore.domain.usecases.AuthenticateUserUseCase
 import javax.inject.Inject
 
 // LoginViewModel - аннотация Hilt, чтобы позволить DI фреймворку внедрять зависимости в этот класс
+
+@HiltViewModel
 class LoginViewModel
 @Inject
-constructor() : ViewModel() {
-    private val authenticateUserUseCase = DependencyInjector.provideAuthenticateUserUseCase()
-
+constructor(
+    private val authenticateUserUseCase:
+    AuthenticateUserUseCase // зависимость, которую мы внедряем через конструктор
+) : ViewModel() {
     private lateinit var googleSignInClient:
             GoogleSignInClient // экземпляр клиента GoogleSignIn, который будет проинициализирован при
 

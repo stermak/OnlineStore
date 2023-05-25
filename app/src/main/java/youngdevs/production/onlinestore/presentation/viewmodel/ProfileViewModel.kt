@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -17,10 +18,10 @@ import youngdevs.production.onlinestore.databinding.FragmentProfileBinding
 import youngdevs.production.onlinestore.domain.models.UserModel
 import youngdevs.production.onlinestore.domain.repository.UserRepositoryImpl
 import youngdevs.production.onlinestore.presentation.ui.fragments.ReauthenticateDialogFragment
+import javax.inject.Inject
 
-
-class ProfileViewModel(private val userRepository: UserRepositoryImpl) : ViewModel() {
-
+@HiltViewModel
+class ProfileViewModel @Inject constructor() : ViewModel() {
 
     fun uploadProfileImage(
         userRepository: UserRepositoryImpl,

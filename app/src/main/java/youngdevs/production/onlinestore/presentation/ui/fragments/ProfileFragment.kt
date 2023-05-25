@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import youngdevs.production.onlinestore.data.utilities.DependencyInjector
+import dagger.hilt.android.AndroidEntryPoint
 import youngdevs.production.onlinestore.databinding.FragmentProfileBinding
 import youngdevs.production.onlinestore.domain.repository.UserRepositoryImpl
 import youngdevs.production.onlinestore.presentation.viewmodel.ProfileViewModel
-import youngdevs.production.onlinestore.presentation.viewmodel.ProfileViewModelFactory
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     companion object {
         private const val SELECT_IMAGE_REQUEST_CODE = 100
     }
 
+    @Inject // использование Dependency Injection для userRepository
     lateinit var userRepository: UserRepositoryImpl
     private lateinit var binding: FragmentProfileBinding
 
-    private val viewModel: ProfileViewModel by viewModels {
-        ProfileViewModelFactory(DependencyInjector.provideUserRepository() as UserRepositoryImpl)
-    }
-
+    // Инициализируем ViewModel через делегат activityViewModels
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +38,6 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userRepository = DependencyInjector.provideUserRepository() as UserRepositoryImpl
         viewModel.loadUserData(userRepository, binding)
         binding.saveProfile.setOnClickListener {
             viewModel.saveProfileChanges(
@@ -52,7 +51,6 @@ class ProfileFragment : Fragment() {
             selectImageFromGallery()
         }
     }
-
 
     private fun selectImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK)

@@ -1,4 +1,4 @@
-package youngdevs.production.youngmoscow.data.utilities
+package youngdevs.production.onlinestore.data.utilities
 
 object CollectionNames {
     const val users = "users"

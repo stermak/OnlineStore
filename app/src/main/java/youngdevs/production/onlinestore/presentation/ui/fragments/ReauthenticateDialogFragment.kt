@@ -4,9 +4,10 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import youngdevs.production.onlinestore.databinding.DialogReauthenticateBinding
 
-
+@AndroidEntryPoint
 class ReauthenticateDialogFragment : DialogFragment() {
 
     interface ReauthenticateListener {

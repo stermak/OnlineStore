@@ -4,14 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import youngdevs.production.onlinestore.data.utilities.DependencyInjector
 import youngdevs.production.onlinestore.domain.usecases.AuthenticateUserUseCase
 import javax.inject.Inject
 
-class RegistrationViewModel : ViewModel() {
-
-    private val authenticateUserUseCase = DependencyInjector.provideAuthenticateUserUseCase()
+@HiltViewModel
+class RegistrationViewModel
+@Inject
+constructor(
+    private val authenticateUserUseCase: AuthenticateUserUseCase
+) : ViewModel() {
 
 
     private val _registrationResult = MutableLiveData<Int?>()
