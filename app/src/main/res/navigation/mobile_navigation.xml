@@ -3,23 +3,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/loginFragment">
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="youngdevs.production.onlinestore.ui.home.HomeFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_cart"
-        android:name="youngdevs.production.onlinestore.ui.cart.CartFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.CartFragment"
         android:label="@string/menu_cart"
         tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="youngdevs.production.onlinestore.ui.profile.ProfileFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="youngdevs.production.onlinestore.presentation.ui.activity.MainActivity"
+        android:label="MainActivity" />
+    <activity
+        android:id="@+id/splashActivity"
+        android:name="youngdevs.production.onlinestore.presentation.ui.activity.SplashActivity"
+        android:label="SplashActivity" />
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.RegistrationFragment"
+        android:label="RegistrationFragment" >
+        <action
+            android:id="@+id/action_registrationFragment_to_navigation_main"
+            app:destination="@id/nav_home" />
+    </fragment>
+
 </navigation>

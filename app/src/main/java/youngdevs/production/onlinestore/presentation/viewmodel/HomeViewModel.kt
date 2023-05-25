@@ -1,4 +1,4 @@
-package youngdevs.production.onlinestore.ui.home
+package youngdevs.production.onlinestore.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,10 +1,11 @@
-package youngdevs.production.onlinestore
+package youngdevs.production.onlinestore.presentation.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import youngdevs.production.onlinestore.R
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package youngdevs.production.onlinestore.ui.profile
+package youngdevs.production.onlinestore.presentation.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import youngdevs.production.onlinestore.databinding.FragmentProfileBinding
+import youngdevs.production.onlinestore.databinding.FragmentCartBinding
+import youngdevs.production.onlinestore.presentation.viewmodel.CartViewModel
 
-class ProfileFragment : Fragment() {
+class CartFragment : Fragment() {
 
-    private var _binding: FragmentProfileBinding? = null
+    private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,11 +19,12 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
+        val cartViewModel =
+            ViewModelProvider(this)[CartViewModel::class.java]
 
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentCartBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
 
 
 

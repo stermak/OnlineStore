@@ -1,4 +1,4 @@
-package youngdevs.production.onlinestore.ui.home
+package youngdevs.production.onlinestore.presentation.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import youngdevs.production.onlinestore.databinding.FragmentHomeBinding
+import youngdevs.production.onlinestore.presentation.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
 

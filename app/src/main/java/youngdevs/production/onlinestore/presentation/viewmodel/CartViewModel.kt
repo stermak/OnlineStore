@@ -1,4 +1,4 @@
-package youngdevs.production.onlinestore.ui.cart
+package youngdevs.production.onlinestore.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 

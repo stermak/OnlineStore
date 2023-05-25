@@ -1,24 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
+    android:layout_marginBottom="?attr/actionBarSize">
 
-    <TextView
-        android:id="@+id/text_slideshow"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:background="@color/bgColor"
+        android:paddingLeft="@dimen/fragment_horizontal_margin"
+        android:paddingTop="@dimen/fragment_vertical_margin"
+        android:paddingRight="@dimen/fragment_horizontal_margin"
+        android:paddingBottom="@dimen/fragment_vertical_margin"
+        tools:context=".presentation.ui.fragments.ProfileFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/addLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/dashHeading"
+                    style="@style/titleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Profile"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/profilePic"
+                    android:layout_width="175dp"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    app:layout_constraintTop_toBottomOf="@id/dashHeading"
+                    app:srcCompat="@drawable/userpic" />
+
+                <Button
+                    android:id="@+id/uploadPhotoButton"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:text="@string/upload_photo"
+                    app:layout_constraintEnd_toEndOf="@id/profilePic"
+                    app:layout_constraintTop_toBottomOf="@id/profilePic" />
+
+
+                <EditText
+                    android:id="@+id/usernameEditTxt"
+                    style="@style/inputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/login_user"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="@string/usernameTxt"
+                    android:inputType="textPersonName"
+                    android:textColorHint="@color/login_grey"/>
+
+                <EditText
+                    android:id="@+id/emailEditTxt"
+                    style="@style/inputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofilledHighlight="@color/trans"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/login_mail"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="@string/emailTxt"
+                    android:inputType="textPersonName"
+                    android:textColorHint="@color/login_grey"/>
+
+                <EditText
+                    android:id="@+id/phoneEditTxt"
+                    style="@style/inputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofilledHighlight="@color/trans"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/custom_phone_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="@string/phoneTxt"
+                    android:inputType="phone|text"
+                    android:textColorHint="@color/login_grey"/>
+
+                <EditText
+                    android:id="@+id/passwordEditTxt"
+                    style="@style/inputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofilledHighlight="@color/trans"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/login_lock"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="@string/passwordTxt"
+                    android:inputType="text"
+                    android:textColorHint="@color/login_grey"/>
+
+                <Button
+                    android:id="@+id/saveProfile"
+                    style="@style/buttonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fragment_vertical_margin"
+                    android:text="@string/saveBtn" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
