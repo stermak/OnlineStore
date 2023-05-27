@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "50092265718-o8gnemsim2j88c7l03331mo4293hg211.apps.googleusercontent.com",
+          "client_id": "50092265718-atr6st9mgokm12j3gjclp1kaghphgnnv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "youngdevs.production.onlinestore",
@@ -22,7 +22,7 @@
           }
         },
         {
-          "client_id": "50092265718-fji8m9r0u3s7kscg986v5fk7dv2a6u8b.apps.googleusercontent.com",
+          "client_id": "50092265718-2t2v8heo67t6tqpu7b5krmbt3t0okt9t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "50092265718-fji8m9r0u3s7kscg986v5fk7dv2a6u8b.apps.googleusercontent.com",
+              "client_id": "50092265718-2t2v8heo67t6tqpu7b5krmbt3t0okt9t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

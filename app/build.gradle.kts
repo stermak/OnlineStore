@@ -25,10 +25,12 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -44,6 +46,7 @@ android {
 }
 
 dependencies {
+
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.appcompat:appcompat-resources:1.6.1")
@@ -61,11 +64,15 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.google.maps.android:android-maps-utils:3.4.0")
     implementation("com.google.android.libraries.places:places:3.1.0")
+    implementation("com.google.dagger:hilt-android:2.46.1")
+    implementation("org.mockito:mockito-core:5.3.1")
+    implementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation("androidx.room:room-runtime:2.5.1")
     implementation("androidx.room:room-ktx:2.5.1")
     implementation("androidx.room:room-rxjava2:2.5.1")
+    implementation("androidx.room:room-runtime:2.5.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.6.1")
@@ -87,8 +94,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
 
     //annotation
-    kapt("androidx.room:room-compiler:2.5.1")
-    kapt("com.github.bumptech.glide:compiler:4.15.1")
+    annotationProcessor("androidx.room:room-compiler:2.5.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
     //test
     implementation("junit:junit:4.13.2")
@@ -99,21 +106,18 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.room:room-testing:2.5.1")
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation ("androidx.test:runner:1.5.2")
+    androidTestImplementation ("androidx.test:rules:1.5.0")
     debugImplementation("androidx.fragment:fragment-testing:1.5.7")
-    implementation("org.mockito:mockito-core:5.3.1")
-    implementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+
 
     //api
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
     //kapt
-    kapt("androidx.room:room-compiler:2.5.1")
-
-    implementation("com.google.dagger:hilt-android:2.46.1")
     kapt("com.google.dagger:hilt-compiler:2.46.1")
+    kapt("androidx.room:room-compiler:2.5.1")
 }
 
 kapt {
