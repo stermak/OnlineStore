@@ -2,52 +2,109 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/loginFragment">
+    app:startDestination="@id/loginFragment">
 
-    <fragment
-        android:id="@+id/nav_home"
-        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/nav_cart"
-        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.CartFragment"
-        android:label="@string/menu_cart"
-        tools:layout="@layout/fragment_cart" />
+    <activity
+        android:id="@+id/activityMain"
+        android:name="youngdevs.production.onlinestore.presentation.ui.activity.MainActivity"
+        android:label="MainActivity" />
 
-    <fragment
-        android:id="@+id/nav_profile"
-        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.ProfileFragment"
-        android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="youngdevs.production.onlinestore.presentation.ui.fragments.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_loginFragment_to_navigation_main"
+            app:destination="@id/mainFragment" />
     </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="youngdevs.production.onlinestore.presentation.ui.activity.MainActivity"
-        android:label="MainActivity" />
-    <activity
-        android:id="@+id/splashActivity"
-        android:name="youngdevs.production.onlinestore.presentation.ui.activity.SplashActivity"
-        android:label="SplashActivity" />
     <fragment
         android:id="@+id/registrationFragment"
         android:name="youngdevs.production.onlinestore.presentation.ui.fragments.RegistrationFragment"
-        android:label="RegistrationFragment" >
+        android:label="RegistrationFragment"
+        tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_registrationFragment_to_navigation_main"
-            app:destination="@id/nav_home" />
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_favouriteEventsFragment"
+            app:destination="@id/favouriteEventsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_sightseeingsFragment"
+            app:destination="@id/sightseeingsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.MapsFragment"
+        android:label="MapsFragment"
+        tools:layout="@layout/fragment_maps" />
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment">
+            <argument
+                android:name="eventId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.EventDetailsFragment"
+        android:label="EventDetailsFragment">
+        <argument
+            android:name="eventId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteEventsFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.FavouriteEventsFragment"
+        android:label="FavouriteEventsFragment">
+        <action
+            android:id="@+id/action_favouriteEventsFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment">
+            <argument
+                android:name="eventId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/sightseeingsFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.SightseeingsFragment"
+        android:label="SightseeingsFragment" />
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language" />
 </navigation>

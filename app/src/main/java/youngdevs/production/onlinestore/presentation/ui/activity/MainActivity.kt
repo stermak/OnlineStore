@@ -1,61 +1,66 @@
 package youngdevs.production.onlinestore.presentation.ui.activity
 
+import android.content.Context
 import android.os.Bundle
-import android.view.Menu
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import youngdevs.production.onlinestore.R
 import youngdevs.production.onlinestore.databinding.ActivityMainBinding
+import youngdevs.production.onlinestore.presentation.ui.fragments.MainFragment
+import youngdevs.production.onlinestore.presentation.viewmodel.LanguageViewModel
+import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    companion object {
+        var selectedLanguage: String? = null
+    }
+
     private lateinit var binding: ActivityMainBinding
 
+    // Объект, который связывает элементы интерфейса в макете с кодом в MainActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setSupportActionBar(binding.appBarMain.toolbar)
+        // Здесь мы проверяем, сохранен ли язык в настройках, и если да, то применяем этот язык
+        val sharedPref = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
+        val languageCode = sharedPref.getString("SelectedLanguage", Locale.getDefault().language)
+        if (languageCode != null) {
+            LanguageViewModel.changeLanguage(this, languageCode)
+        }
 
+        // Инфлейт макета ActivityMainBinding и установка его в качестве контента активности
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.nav_cart, R.id.nav_profile
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        // Настройка BottomNavigationView для навигации по приложению
+        val navView: BottomNavigationView = binding.navView
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        // Настройка OnBackPressedCallback для обработки нажатия на кнопку "назад" на устройстве
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Если текущее назначение - MainFragment, то передается управление его методу handleOnBackPressed()
+                // В противном случае - навигация вверх по стеку фрагментов
+                if (navController.currentDestination?.id == R.id.mainFragment) {
+                    val navHostFragment =
+                        supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as? NavHostFragment
+                    val mainFragment =
+                        navHostFragment?.childFragmentManager?.fragments?.firstOrNull { it is MainFragment } as? MainFragment
+                    mainFragment?.handleOnBackPressed() ?: run { finish() }
+                } else {
+                    navController.navigateUp()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 }

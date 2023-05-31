@@ -16,7 +16,6 @@ constructor(
     private val authenticateUserUseCase: AuthenticateUserUseCase
 ) : ViewModel() {
 
-
     private val _registrationResult = MutableLiveData<Int?>()
     val registrationResult: LiveData<Int?>
         get() = _registrationResult

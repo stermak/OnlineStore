@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.navigation.NavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import youngdevs.production.onlinestore.R
@@ -91,15 +91,20 @@ class RegistrationFragment : Fragment() {
         }
 
         FirebaseAuth.getInstance().addAuthStateListener { firebaseAuth ->
-            if (firebaseAuth.currentUser != null) {
+            if (firebaseAuth.currentUser != null &&
+                findNavController().currentDestination?.id == R.id.registrationFragment
+            ) {
                 findNavController()
                     .navigate(
                         R.id
                             .action_registrationFragment_to_navigation_main
                     )
-                val navigationView =
-                    activity?.findViewById<NavigationView>(R.id.nav_view)
-                navigationView?.visibility = View.VISIBLE
+
+                val bottomNavigation =
+                    activity?.findViewById<BottomNavigationView>(
+                        R.id.nav_view
+                    )
+                bottomNavigation?.visibility = View.VISIBLE
             }
         }
     }
@@ -108,6 +113,12 @@ class RegistrationFragment : Fragment() {
     // Метод устанавливает обработчики событий на кнопки и другие элементы пользовательского
     // интерфейса.
     private fun setEventListener() {
+        binding.loginButton.setOnClickListener {
+            findNavController()
+                .navigate(
+                    R.id.action_registrationFragment_to_loginFragment
+                ) // Переход к экрану регистрации при нажатии кнопки "Зарегистрироваться"
+        }
         binding.registration.setOnClickListener {
             val email = binding.emailField.text.toString().trim()
             val password = binding.passwordRegistrationField.text.toString().trim()

@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.navigation.NavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,16 +59,17 @@ class LoginFragment : Fragment() {
                 Log.d(
                     "LoginFragment",
                     "isLoginSuccessful changed to $it"
-                ) // добавляем вызов Log.d() для вывода информации об изменении значения LiveData в
-                // лог
-                if (it == true) {
+                )
+                if (it == true && findNavController().currentDestination?.id == R.id.loginFragment) {
                     findNavController()
                         .navigate(
-                            R.id.action_loginFragment_to_nav_home
+                            R.id.action_loginFragment_to_navigation_main
                         )
-                    val navigationView =
-                        activity?.findViewById<NavigationView>(R.id.nav_view)
-                    navigationView?.visibility = View.VISIBLE
+                    val bottomNavigation =
+                        activity?.findViewById<BottomNavigationView>(
+                            R.id.nav_view
+                        )
+                    bottomNavigation?.visibility = View.VISIBLE
                 }
             }
         }

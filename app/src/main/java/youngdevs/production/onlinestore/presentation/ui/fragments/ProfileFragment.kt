@@ -1,6 +1,6 @@
 package youngdevs.production.onlinestore.presentation.ui.fragments
 
-import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import youngdevs.production.onlinestore.domain.repository.UserRepositoryImpl
 import youngdevs.production.onlinestore.presentation.viewmodel.ProfileViewModel
 import javax.inject.Inject
 
+// Используем AndroidEntryPoint для автоматического внедрения зависимостей с Hilt
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
     companion object {
@@ -60,7 +61,7 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SELECT_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+        if (requestCode == SELECT_IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             val selectedImage = data.data
             selectedImage?.let {
                 binding.profilePic.setImageURI(selectedImage)

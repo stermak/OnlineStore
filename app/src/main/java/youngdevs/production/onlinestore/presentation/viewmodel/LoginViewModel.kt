@@ -16,7 +16,6 @@ import youngdevs.production.onlinestore.domain.usecases.AuthenticateUserUseCase
 import javax.inject.Inject
 
 // LoginViewModel - аннотация Hilt, чтобы позволить DI фреймворку внедрять зависимости в этот класс
-
 @HiltViewModel
 class LoginViewModel
 @Inject

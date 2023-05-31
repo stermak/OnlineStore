@@ -191,4 +191,6 @@ constructor(
         // Update the profileImage field of the Firestore document
         databaseRef.update("profileImage", imageUrl).await()
     }
+
+
 }
