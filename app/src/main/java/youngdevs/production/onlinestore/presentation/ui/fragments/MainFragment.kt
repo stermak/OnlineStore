@@ -11,8 +11,10 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import youngdevs.production.onlinestore.data.entities.Product
 import youngdevs.production.onlinestore.data.utilities.LoadingStatus
 import youngdevs.production.onlinestore.databinding.FragmentMainBinding
 import youngdevs.production.onlinestore.presentation.ui.adapter.ProductsAdapter
@@ -47,17 +49,21 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Инициализируем адаптер достопримечательностей
-        productsAdapter =
-            ProductsAdapter(viewLifecycleOwner.lifecycleScope)
+        productsAdapter = ProductsAdapter(
+            viewLifecycleOwner.lifecycleScope,
+            object : ProductsAdapter.OnAddToCartClickListener {
+                override fun onAddToCartClick(product: Product) {
+                    viewModel.addToCart(product)
+                }
+            }
+        )
 
         binding.searchField.addTextChangedListener { text ->
             viewModel.searchProducts(text.toString())
         }
 
         // Настраиваем RecyclerView с LinearLayoutManager и устанавливаем адаптер
-        binding.recyclerView.layoutManager =
-            LinearLayoutManager(requireContext())
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView.adapter = productsAdapter
 
         // Обрабатываем изменения данных в ViewModel и обновляем адаптер
@@ -65,6 +71,16 @@ class MainFragment : Fragment() {
             ->
             productsAdapter.submitList(products)
         }
+
+        productsAdapter = ProductsAdapter(
+            viewLifecycleOwner.lifecycleScope,
+            object : ProductsAdapter.OnAddToCartClickListener {
+                override fun onAddToCartClick(product: Product) {
+                    viewModel.addToCart(product)
+                }
+            }
+        )
+
 
         viewModel.loadingStatus.observe(viewLifecycleOwner) { status ->
             when (status) {

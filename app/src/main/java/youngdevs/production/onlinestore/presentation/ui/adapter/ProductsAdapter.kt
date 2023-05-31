@@ -13,7 +13,7 @@ import youngdevs.production.onlinestore.data.entities.Product
 import youngdevs.production.onlinestore.data.services.RetrofitClient
 import youngdevs.production.onlinestore.databinding.ItemProductBinding
 
-class ProductsAdapter(private val scope: LifecycleCoroutineScope) :
+class ProductsAdapter(private val scope: LifecycleCoroutineScope,private val onAddToCartClickListener: OnAddToCartClickListener) :
     ListAdapter<Product, ProductsAdapter.ProductViewHolder>(
         DiffCallback()
     ) {
@@ -28,8 +28,9 @@ class ProductsAdapter(private val scope: LifecycleCoroutineScope) :
                 parent,
                 false
             )
-        return ProductViewHolder(binding, scope)
+        return ProductViewHolder(binding, scope, onAddToCartClickListener)
     }
+
 
     // Привязка данных к ViewHolder
     override fun onBindViewHolder(
@@ -40,10 +41,18 @@ class ProductsAdapter(private val scope: LifecycleCoroutineScope) :
         holder.bind(product)
     }
 
+
+
+    interface OnAddToCartClickListener {
+        fun onAddToCartClick(product: Product)
+    }
+
+
     // Определение класса SightseeingViewHolder, который наследуется от RecyclerView.ViewHolder
     class ProductViewHolder(
-        private val binding: ItemProductBinding,
-        private val scope: LifecycleCoroutineScope
+        val binding: ItemProductBinding, // изменено с private на public
+        private val scope: LifecycleCoroutineScope,
+        private val onAddToCartClickListener: OnAddToCartClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
         // Привязка данных к View
@@ -52,6 +61,10 @@ class ProductsAdapter(private val scope: LifecycleCoroutineScope) :
             binding.description.text = product.description
             binding.availability.text = product.availability
             loadImage(product.image)
+
+            binding.add_to_cart_button.setOnClickListener {
+                onAddToCartClickListener.onAddToCartClick(product)
+            }
         }
 
         // Загрузка изображения с помощью ImagesService и отображение его в элементе списка
