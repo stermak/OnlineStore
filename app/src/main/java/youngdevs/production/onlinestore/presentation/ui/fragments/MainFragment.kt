@@ -7,10 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import youngdevs.production.onlinestore.data.utilities.LoadingStatus
 import youngdevs.production.onlinestore.databinding.FragmentMainBinding
+import youngdevs.production.onlinestore.presentation.ui.adapter.ProductsAdapter
 import youngdevs.production.onlinestore.presentation.viewmodel.MainViewModel
 
 // Фрагмент, отображающий список событий
@@ -26,6 +31,8 @@ class MainFragment : Fragment() {
     private val binding
         get() = _binding!!
 
+    private lateinit var productsAdapter: ProductsAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +47,62 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Инициализируем адаптер достопримечательностей
+        productsAdapter =
+            ProductsAdapter(viewLifecycleOwner.lifecycleScope)
 
+        binding.searchField.addTextChangedListener { text ->
+            viewModel.searchProducts(text.toString())
+        }
+
+        // Настраиваем RecyclerView с LinearLayoutManager и устанавливаем адаптер
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = productsAdapter
+
+        // Обрабатываем изменения данных в ViewModel и обновляем адаптер
+        viewModel.products.observe(viewLifecycleOwner) { products
+            ->
+            productsAdapter.submitList(products)
+        }
+
+        viewModel.loadingStatus.observe(viewLifecycleOwner) { status ->
+            when (status) {
+                LoadingStatus.LOADING -> {
+                    binding.recyclerView.visibility = View.GONE
+                    binding.standing.visibility = View.VISIBLE
+                    binding.sitting.visibility = View.VISIBLE
+                    binding.errorServer.visibility = View.VISIBLE
+                    binding.sorry.visibility = View.VISIBLE
+                    binding.imageView8.visibility = View.VISIBLE
+                    binding.imageView9.visibility = View.VISIBLE
+                }
+
+                LoadingStatus.LOADED -> {
+                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.standing.visibility = View.GONE
+                    binding.sitting.visibility = View.GONE
+                    binding.errorServer.visibility = View.GONE
+                    binding.sorry.visibility = View.GONE
+                    binding.imageView8.visibility = View.GONE
+                    binding.imageView9.visibility = View.GONE
+                }
+
+                LoadingStatus.ERROR -> {
+                    binding.recyclerView.visibility = View.GONE
+                    binding.standing.visibility = View.VISIBLE
+                    binding.sitting.visibility = View.VISIBLE
+                    binding.errorServer.visibility = View.VISIBLE
+                    binding.sorry.visibility = View.VISIBLE
+                    binding.imageView8.visibility = View.VISIBLE
+                    binding.imageView9.visibility = View.VISIBLE
+                }
+            }
+        }
+
+
+        // Загружаем список достопримечательностей
+        viewModel.loadProducts()
     }
 
     fun handleOnBackPressed() {

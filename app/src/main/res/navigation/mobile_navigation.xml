@@ -41,14 +41,9 @@
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
         <action
-            android:id="@+id/action_settingsFragment_to_favouriteEventsFragment"
-            app:destination="@id/favouriteEventsFragment" />
-        <action
             android:id="@+id/action_settingsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_sightseeingsFragment"
-            app:destination="@id/sightseeingsFragment" />
+
         <action
             android:id="@+id/action_settingsFragment_to_languageFragment"
             app:destination="@id/languageFragment" />
@@ -65,43 +60,13 @@
         android:name="youngdevs.production.onlinestore.presentation.ui.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
-        <action
-            android:id="@+id/action_mainFragment_to_eventDetailsFragment"
-            app:destination="@id/eventDetailsFragment">
-            <argument
-                android:name="eventId"
-                app:argType="integer" />
-        </action>
     </fragment>
 
-    <fragment
-        android:id="@+id/eventDetailsFragment"
-        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.EventDetailsFragment"
-        android:label="EventDetailsFragment">
-        <argument
-            android:name="eventId"
-            app:argType="integer" />
-    </fragment>
-    <fragment
-        android:id="@+id/favouriteEventsFragment"
-        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.FavouriteEventsFragment"
-        android:label="FavouriteEventsFragment">
-        <action
-            android:id="@+id/action_favouriteEventsFragment_to_eventDetailsFragment"
-            app:destination="@id/eventDetailsFragment">
-            <argument
-                android:name="eventId"
-                app:argType="integer" />
-        </action>
-    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="youngdevs.production.onlinestore.presentation.ui.fragments.ProfileFragment"
         android:label="ProfileFragment" />
-    <fragment
-        android:id="@+id/sightseeingsFragment"
-        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.SightseeingsFragment"
-        android:label="SightseeingsFragment" />
+
     <fragment
         android:id="@+id/languageFragment"
         android:name="youngdevs.production.onlinestore.presentation.ui.fragments.LanguageFragment"
