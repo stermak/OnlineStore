@@ -49,14 +49,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productsAdapter = ProductsAdapter(
-            viewLifecycleOwner.lifecycleScope,
-            object : ProductsAdapter.OnAddToCartClickListener {
-                override fun onAddToCartClick(product: Product) {
-                    viewModel.addToCart(product)
-                }
-            }
-        )
+        productsAdapter =
+            ProductsAdapter(viewLifecycleOwner.lifecycleScope)
 
         binding.searchField.addTextChangedListener { text ->
             viewModel.searchProducts(text.toString())
@@ -66,20 +60,10 @@ class MainFragment : Fragment() {
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView.adapter = productsAdapter
 
-        // Обрабатываем изменения данных в ViewModel и обновляем адаптер
         viewModel.products.observe(viewLifecycleOwner) { products
             ->
             productsAdapter.submitList(products)
         }
-
-        productsAdapter = ProductsAdapter(
-            viewLifecycleOwner.lifecycleScope,
-            object : ProductsAdapter.OnAddToCartClickListener {
-                override fun onAddToCartClick(product: Product) {
-                    viewModel.addToCart(product)
-                }
-            }
-        )
 
 
         viewModel.loadingStatus.observe(viewLifecycleOwner) { status ->

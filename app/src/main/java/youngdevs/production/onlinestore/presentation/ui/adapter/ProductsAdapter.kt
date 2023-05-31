@@ -13,7 +13,7 @@ import youngdevs.production.onlinestore.data.entities.Product
 import youngdevs.production.onlinestore.data.services.RetrofitClient
 import youngdevs.production.onlinestore.databinding.ItemProductBinding
 
-class ProductsAdapter(private val scope: LifecycleCoroutineScope,private val onAddToCartClickListener: OnAddToCartClickListener) :
+class ProductsAdapter(private val scope: LifecycleCoroutineScope) :
     ListAdapter<Product, ProductsAdapter.ProductViewHolder>(
         DiffCallback()
     ) {
@@ -28,9 +28,8 @@ class ProductsAdapter(private val scope: LifecycleCoroutineScope,private val onA
                 parent,
                 false
             )
-        return ProductViewHolder(binding, scope, onAddToCartClickListener)
+        return ProductViewHolder(binding, scope)
     }
-
 
     // Привязка данных к ViewHolder
     override fun onBindViewHolder(
@@ -41,18 +40,10 @@ class ProductsAdapter(private val scope: LifecycleCoroutineScope,private val onA
         holder.bind(product)
     }
 
-
-
-    interface OnAddToCartClickListener {
-        fun onAddToCartClick(product: Product)
-    }
-
-
     // Определение класса SightseeingViewHolder, который наследуется от RecyclerView.ViewHolder
     class ProductViewHolder(
-        val binding: ItemProductBinding, // изменено с private на public
-        private val scope: LifecycleCoroutineScope,
-        private val onAddToCartClickListener: OnAddToCartClickListener
+        private val binding: ItemProductBinding,
+        private val scope: LifecycleCoroutineScope
     ) : RecyclerView.ViewHolder(binding.root) {
 
         // Привязка данных к View
@@ -61,10 +52,6 @@ class ProductsAdapter(private val scope: LifecycleCoroutineScope,private val onA
             binding.description.text = product.description
             binding.availability.text = product.availability
             loadImage(product.image)
-
-            binding.add_to_cart_button.setOnClickListener {
-                onAddToCartClickListener.onAddToCartClick(product)
-            }
         }
 
         // Загрузка изображения с помощью ImagesService и отображение его в элементе списка

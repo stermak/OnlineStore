@@ -27,9 +27,6 @@ constructor(
     // Используем MutableLiveData для изменения списка достопримечательностей внутри ViewModel
     private val _products = MutableLiveData<List<Product>>()
 
-    private val _cart = MutableLiveData<List<Product>>(emptyList())
-    val cart: LiveData<List<Product>> = _cart
-
     // Объявляем LiveData для предоставления списка достопримечательностей во внешний код
     val products: LiveData<List<Product>> = _products
     val loadingStatus = MutableLiveData<LoadingStatus>()
@@ -82,12 +79,4 @@ constructor(
             null
         }
     }
-
-    fun addToCart(product: Product) {
-        val currentCart = _cart.value.orEmpty().toMutableList()
-        currentCart.add(product)
-        _cart.value = currentCart
-    }
-
-
 }
