@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_languageFragment"
             app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
 
     <fragment
@@ -72,4 +75,8 @@
         android:name="youngdevs.production.onlinestore.presentation.ui.fragments.LanguageFragment"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="youngdevs.production.onlinestore.presentation.ui.fragments.CartFragment"
+        android:label="CartFragment" />
 </navigation>

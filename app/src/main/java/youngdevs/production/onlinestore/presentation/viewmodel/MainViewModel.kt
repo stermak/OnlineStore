@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import youngdevs.production.onlinestore.data.dao.CartDao
 import youngdevs.production.onlinestore.data.entities.Product
 import youngdevs.production.onlinestore.data.services.ImagesService
 import youngdevs.production.onlinestore.data.services.ProductsService
@@ -16,12 +17,10 @@ import youngdevs.production.onlinestore.data.utilities.LoadingStatus
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel
-@Inject
-constructor(
-    // Внедряем сервисы для работы с достопримечательностями и изображениями
+class MainViewModel @Inject constructor(
     private val productsService: ProductsService,
-    private val imagesService: ImagesService
+    private val imagesService: ImagesService,
+    private val cartDao: CartDao
 ) : ViewModel() {
 
     // Используем MutableLiveData для изменения списка достопримечательностей внутри ViewModel
@@ -77,6 +76,12 @@ constructor(
             }
         } catch (e: Exception) {
             null
+        }
+    }
+
+    fun addProductToCart(product: Product, quantity: Int) {
+        viewModelScope.launch {
+            cartDao.insert(product.toCartItem(quantity))
         }
     }
 }
