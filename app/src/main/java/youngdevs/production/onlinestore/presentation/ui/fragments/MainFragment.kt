@@ -49,8 +49,9 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productsAdapter =
-            ProductsAdapter(viewLifecycleOwner.lifecycleScope)
+        productsAdapter = ProductsAdapter(viewLifecycleOwner.lifecycleScope) { product ->
+            viewModel.addProductToCart(product, 1) // добавить 1 штуку товара в корзину
+        }
 
         binding.searchField.addTextChangedListener { text ->
             viewModel.searchProducts(text.toString())

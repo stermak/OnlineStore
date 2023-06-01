@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import youngdevs.production.onlinestore.data.dao.CartDao
+import youngdevs.production.onlinestore.data.entities.CartItem
 import youngdevs.production.onlinestore.data.entities.Product
 import youngdevs.production.onlinestore.data.services.ImagesService
 import youngdevs.production.onlinestore.data.services.ProductsService
@@ -81,7 +82,16 @@ class MainViewModel @Inject constructor(
 
     fun addProductToCart(product: Product, quantity: Int) {
         viewModelScope.launch {
-            cartDao.insert(product.toCartItem(quantity))
+            val cartItem = CartItem(
+                cartItemId = 0,
+                productId = product.id,
+                quantity = quantity,
+                name = product.name,
+                description = product.description,
+                availability = product.availability,
+                image = product.image
+            )
+            cartDao.insert(cartItem)
         }
     }
 }

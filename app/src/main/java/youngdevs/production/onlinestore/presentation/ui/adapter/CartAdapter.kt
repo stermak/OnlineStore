@@ -37,7 +37,9 @@ class CartAdapter : ListAdapter<CartItem, CartAdapter.CartViewHolder>(CartItemDi
         }
 
         override fun areContentsTheSame(oldItem: CartItem, newItem: CartItem): Boolean {
-            return oldItem == newItem
+            return oldItem.productId == newItem.productId &&
+                    oldItem.quantity == newItem.quantity
         }
     }
+
 }

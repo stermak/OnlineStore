@@ -1,6 +1,7 @@
 package youngdevs.production.onlinestore.presentation.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +24,6 @@ class CartFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCartBinding.inflate(layoutInflater, container, false)
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,10 +35,10 @@ class CartFragment : Fragment() {
         binding.recyclerView.adapter = cartAdapter
 
         viewModel.cartItems.observe(viewLifecycleOwner) { cartItems ->
+            Log.d("CartFragment", "Updating cart with items: $cartItems")
             cartAdapter.submitList(cartItems)
         }
-
-        // Загружаем элементы корзины
-        viewModel.loadCartItems()  // Допустим, у вас есть функция для загрузки элементов корзины
+        viewModel.loadCartItems()
     }
+
 }

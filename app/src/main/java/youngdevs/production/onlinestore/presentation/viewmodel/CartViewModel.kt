@@ -1,5 +1,6 @@
 package youngdevs.production.onlinestore.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,6 +12,13 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(private val cartDao: CartDao) : ViewModel() {
     val cartItems: LiveData<List<CartItem>> = cartDao.getAll()
 
-    fun loadCartItems() {
+    init {
+        cartItems.observeForever { cartItems ->
+            Log.d("CartViewModel", "Cart items updated: $cartItems")
+        }
+    }
+
+    fun loadCartItems(){
+
     }
 }

@@ -1,5 +1,6 @@
 package youngdevs.production.onlinestore.data.dao
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
@@ -15,7 +16,10 @@ interface CartDao {
     fun getAll(): LiveData<List<CartItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(cartItem: CartItem)
+    suspend fun insert(cartItem: CartItem) {
+        Log.d("CartDao", "Inserting item into cart: $cartItem")
+        // Insert implementation...
+    }
 
     @Delete
     suspend fun delete(cartItem: CartItem)

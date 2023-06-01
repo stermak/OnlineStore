@@ -13,11 +13,11 @@ import youngdevs.production.onlinestore.data.entities.Product
 import youngdevs.production.onlinestore.data.services.RetrofitClient
 import youngdevs.production.onlinestore.databinding.ItemProductBinding
 
-class ProductsAdapter(private val scope: LifecycleCoroutineScope) :
-    ListAdapter<Product, ProductsAdapter.ProductViewHolder>(
-        DiffCallback()
-    ) {
-    // Создание нового ViewHolder, которому передается экземпляр макета ItemSightseeingBinding
+class ProductsAdapter(
+    private val scope: LifecycleCoroutineScope,
+    private val onAddToCart: (product: Product) -> Unit
+) : ListAdapter<Product, ProductsAdapter.ProductViewHolder>(DiffCallback()) {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -39,22 +39,21 @@ class ProductsAdapter(private val scope: LifecycleCoroutineScope) :
         val product = getItem(position)
         holder.bind(product)
     }
-
-    // Определение класса SightseeingViewHolder, который наследуется от RecyclerView.ViewHolder
-    class ProductViewHolder(
+    inner class ProductViewHolder(
         private val binding: ItemProductBinding,
         private val scope: LifecycleCoroutineScope
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        // Привязка данных к View
         fun bind(product: Product) {
             binding.name.text = product.name
             binding.description.text = product.description
             binding.availability.text = product.availability
             loadImage(product.image)
+            binding.addToCartButton.setOnClickListener {
+                onAddToCart(product)
+            }
         }
 
-        // Загрузка изображения с помощью ImagesService и отображение его в элементе списка
         private fun loadImage(imageName: String) {
             val imagesService = RetrofitClient.imagesService
             scope.launch {
@@ -62,7 +61,7 @@ class ProductsAdapter(private val scope: LifecycleCoroutineScope) :
                     val response =
                         imagesService.getImage(
                             imageName.trim()
-                        ) // Убедитесь, что нет пробелов перед именем файла
+                        )
                     if (response.isSuccessful) {
                         val inputStream = response.body()?.byteStream()
                         inputStream?.let {
@@ -87,8 +86,6 @@ class ProductsAdapter(private val scope: LifecycleCoroutineScope) :
         }
     }
 
-    // Определение класса DiffCallback, который используется для оптимизации обновления списка
-    // достопримечательностей
     private class DiffCallback : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(
             oldItem: Product,
