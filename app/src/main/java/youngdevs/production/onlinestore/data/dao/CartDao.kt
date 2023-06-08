@@ -18,7 +18,6 @@ interface CartDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(cartItem: CartItem) {
         Log.d("CartDao", "Inserting item into cart: $cartItem")
-        // Insert implementation...
     }
 
     @Delete
